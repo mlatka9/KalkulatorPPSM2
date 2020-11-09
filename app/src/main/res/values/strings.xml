@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kalkulator</string>
+    <string name="error">błąd</string>
+
+    <string name="github">https://github.com/mlatka9/KalkulatorPPSM</string>
+    <string name="author">33178</string>
+</resources>
