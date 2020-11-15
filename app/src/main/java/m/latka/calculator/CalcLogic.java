@@ -1,5 +1,7 @@
 package m.latka.calculator;
 
+import org.mariuszgromada.math.mxparser.Expression;
+
 import java.util.ArrayList;
 
 class CalcLogic {
@@ -7,7 +9,12 @@ class CalcLogic {
     private ArrayList<Double> numberList = new ArrayList<>();
     private ArrayList<String> operatorList = new ArrayList<>();
 
-    String calculate(String allInput1) throws Exception{
+    String calculate(String allInput1) throws Exception {
+
+        Expression expression = new Expression("3+3*2/3");
+        Double wynik = expression.calculate();
+
+        // setText.(String.valueOf(wynik))
 
         String tempNumber = "";
 
@@ -51,73 +58,73 @@ class CalcLogic {
             //priority of current operator
             int prioOperator = 0;
 
-            for(int i=0; i<operatorList.size(); i++){
+            for (int i = 0; i < operatorList.size(); i++) {
 
                 String tempOperator = operatorList.get(i);
 
                 switch (tempOperator) {
                     case "S": //sqrt
-                        if(prioOperator<4){
+                        if (prioOperator < 4) {
                             prioOperator = 4;
                             maxOperator = "sqrt";
                         }
                         break;
                     case "L": //log10
-                        if(prioOperator<4){
+                        if (prioOperator < 4) {
                             prioOperator = 4;
                             maxOperator = "log10";
                         }
                         break;
                     case "<": //^2
-                        if(prioOperator<3){
+                        if (prioOperator < 3) {
                             prioOperator = 3;
                             maxOperator = "power2";
                         }
                         break;
                     case ">": //^3
-                        if(prioOperator<3){
+                        if (prioOperator < 3) {
                             prioOperator = 3;
                             maxOperator = "power3";
                         }
                         break;
                     case "#": //-+1
-                        if(prioOperator<2){
+                        if (prioOperator < 2) {
                             prioOperator = 2;
                             maxOperator = "reciprocal";
                         }
                         break;
                     case "%":
-                        if(prioOperator<2){
+                        if (prioOperator < 2) {
                             prioOperator = 2;
                             maxOperator = "percent";
                         }
                         break;
                     case "!":
-                        if(prioOperator<2){
+                        if (prioOperator < 2) {
                             prioOperator = 2;
                             maxOperator = "factorial";
                         }
                         break;
                     case "/":
-                        if(prioOperator<2){
+                        if (prioOperator < 2) {
                             prioOperator = 2;
                             maxOperator = "division";
                         }
                         break;
                     case "x":
-                        if(prioOperator<2){
+                        if (prioOperator < 2) {
                             prioOperator = 2;
                             maxOperator = "multiplication";
                         }
                         break;
                     case "+":
-                        if(prioOperator<1){
+                        if (prioOperator < 1) {
                             prioOperator = 1;
                             maxOperator = "addition";
                         }
                         break;
                     case "-":
-                        if(prioOperator<1){
+                        if (prioOperator < 1) {
                             prioOperator = 1;
                             maxOperator = "subtraction";
                         }
@@ -130,7 +137,7 @@ class CalcLogic {
                     reciprocal();
                     break;
                 case "division":
-                    try{
+                    try {
                         division();
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException(e);
@@ -149,7 +156,7 @@ class CalcLogic {
                     percent();
                     break;
                 case "factorial":
-                    try{
+                    try {
                         factorial();
                     } catch (Exception e) {
                         throw new Exception(e);
@@ -172,14 +179,14 @@ class CalcLogic {
 
         Integer integer = numberList.get(0).intValue();
 
-        if(Math.abs(numberList.get(0)- integer)>0){
+        if (Math.abs(numberList.get(0) - integer) > 0) {
             return String.valueOf(numberList.get(0));
         } else {
             return String.valueOf(integer);
         }
     }
 
-    private void multiplication(){
+    private void multiplication() {
         while (operatorList.contains("x")) {
             int index = operatorList.indexOf("x");
             Double value1 = numberList.get(operatorList.indexOf("x"));
@@ -190,7 +197,7 @@ class CalcLogic {
         }
     }
 
-    private void reciprocal(){
+    private void reciprocal() {
         while (operatorList.contains("#")) {
             int index = operatorList.indexOf("#");
             Double value1 = numberList.get(operatorList.indexOf("#"));
@@ -199,7 +206,7 @@ class CalcLogic {
         }
     }
 
-    private void power2(){
+    private void power2() {
         while (operatorList.contains("<")) {
             int index = operatorList.indexOf("<");
             Double value1 = numberList.get(operatorList.indexOf("<"));
@@ -208,7 +215,7 @@ class CalcLogic {
         }
     }
 
-    private void power3(){
+    private void power3() {
         while (operatorList.contains(">")) {
             int index = operatorList.indexOf(">");
             Double value1 = numberList.get(operatorList.indexOf(">"));
@@ -222,14 +229,14 @@ class CalcLogic {
             int index = operatorList.indexOf("/");
             Double value1 = numberList.get(operatorList.indexOf("/"));
             Double value2 = numberList.get(operatorList.indexOf("/") + 1);
-            if(value2.equals(0.0)) throw new DivisionByZeroException();
+            if (value2.equals(0.0)) throw new DivisionByZeroException();
             numberList.set(index, value1 / value2);
             operatorList.remove(index);
             numberList.remove(index + 1);
         }
     }
 
-    private void subtraction(){
+    private void subtraction() {
         while (operatorList.contains("-")) {
             int index = operatorList.indexOf("-");
             Double value1 = numberList.get(operatorList.indexOf("-"));
@@ -240,7 +247,7 @@ class CalcLogic {
         }
     }
 
-    private void addition(){
+    private void addition() {
         while (operatorList.contains("+")) {
             int index = operatorList.indexOf("+");
             Double value1 = numberList.get(operatorList.indexOf("+"));
@@ -251,7 +258,7 @@ class CalcLogic {
         }
     }
 
-    private void percent(){
+    private void percent() {
         while (operatorList.contains("%")) {
             int index = operatorList.indexOf("%");
             Double value1 = numberList.get(operatorList.indexOf("%"));
@@ -260,7 +267,7 @@ class CalcLogic {
         }
     }
 
-    private void sqrt(){
+    private void sqrt() {
         while (operatorList.contains("S")) {
             int index = operatorList.indexOf("S");
             Double value1 = numberList.get(operatorList.indexOf("S"));
@@ -269,7 +276,7 @@ class CalcLogic {
         }
     }
 
-    private void log10(){
+    private void log10() {
         while (operatorList.contains("L")) {
             int index = operatorList.indexOf("L");
             Double value1 = numberList.get(operatorList.indexOf("L"));
@@ -278,25 +285,25 @@ class CalcLogic {
         }
     }
 
-    private void factorial() throws Exception{
+    private void factorial() throws Exception {
         while (operatorList.contains("!")) {
             int index = operatorList.indexOf("!");
             Double value1 = numberList.get(operatorList.indexOf("!"));
-            try{
-                numberList.set(index, Double.valueOf(factorialCalc(value1.intValue())) );
-            } catch (Exception e){
+            try {
+                numberList.set(index, Double.valueOf(factorialCalc(value1.intValue())));
+            } catch (Exception e) {
                 throw new Exception(e);
             }
             operatorList.remove(index);
         }
     }
 
-    private int factorialCalc(int value) throws Exception{
-        if(value>100000.0) throw new Exception();
-        if((value==0) || (value==1)){
+    private int factorialCalc(int value) throws Exception {
+        if (value > 25) throw new Exception();
+        if ((value == 0) || (value == 1)) {
             return 1;
         } else {
-            return value * factorialCalc(value-1);
+            return value * factorialCalc(value - 1);
         }
     }
 }

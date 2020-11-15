@@ -5,33 +5,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="buttonLeftStyle">
+    <style name="buttonGeneral">
+        <item name="fontFamily">@font/rubikmedium</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:onClick">readInput</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20dp</item>
+        <item name="android:foreground">?selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="buttonLeftStyle" parent="buttonGeneral">
         <item name="android:background">@color/lightGray</item>
-        <item name="android:foreground">?selectableItemBackgroundBorderless</item>
     </style>
 
-    <style name="buttonCentreStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:onClick">readInput</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20dp</item>
+    <style name="buttonCentreStyle" parent="buttonGeneral">
         <item name="android:background">@color/darkGrey</item>
-        <item name="android:foreground">?selectableItemBackgroundBorderless</item>
     </style>
 
-    <style name="buttonRightStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:onClick">readInput</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20dp</item>
+    <style name="buttonRightStyle" parent="buttonGeneral">
         <item name="android:background">@color/green</item>
-        <item name="android:foreground">?selectableItemBackgroundBorderless</item>
     </style>
 </resources>
